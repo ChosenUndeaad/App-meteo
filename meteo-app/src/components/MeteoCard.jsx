@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../style/meteoCard.css";
 
 const MeteoCard = () => {
   //API Key: 5acac74060d7655a3ba8c4c4437a2153
   // URL: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
+  const inputRef = useRef();
   const [weatherData, setWeatherData] = useState(null);
 
   const search = async (city) => {
@@ -40,8 +41,10 @@ const MeteoCard = () => {
     <div className='meteo-card'>
       <h1>Previsioni</h1>
       <div className='search-bar'>
-        <input type='text' placeholder='Cerca una città ' />
-        <button type='button'>Cerca</button>
+        <input type='text' placeholder='Cerca una città ' ref={inputRef} />
+        <button type='button' onClick={() => search(inputRef.current.value)}>
+          Cerca
+        </button>
       </div>
       <img src={iconUrl} alt='Icona del tempo' className='tempo-icona' />
       <p className='temperatura'>{weatherData.temperature}°C</p>{" "}
