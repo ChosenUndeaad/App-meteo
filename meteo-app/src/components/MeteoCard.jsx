@@ -1,25 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/meteoCard.css";
 
 const MeteoCard = () => {
   //API Key: 5acac74060d7655a3ba8c4c4437a2153
   // URL: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
 
+  const [weatherData, setWeatherData] = useState(null);
+
   const search = async (city) => {
     try {
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5acac74060d7655a3ba8c4c4437a2153`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=5acac74060d7655a3ba8c4c4437a2153`;
 
       const response = await fetch(url);
       const data = await response.json();
       console.log(data);
+      setWeatherData({
+        humidity: data.main.humidity,
+        windSpeed: data.wind.speed,
+        temperature: Math.floor(data.main.temp),
+        location: data.name,
+        icon: data.weather[0].icon,
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    search("London");
+    search("Rome");
   }, []);
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
+
+  const iconUrl = `https://openweathermap.org/img/wn/${weatherData.icon}@2x.png`;
 
   return (
     <div className='meteo-card'>
@@ -28,22 +43,17 @@ const MeteoCard = () => {
         <input type='text' placeholder='Cerca una città ' />
         <button type='button'>Cerca</button>
       </div>
-
-      <img
-        src='https://www.mrw.it/wp-content/uploads/2020/12/0iwkf4_1609360688.jpg'
-        alt='Icona del tempo'
-        className='tempo-icona'
-      />
-      <p className='temperatura'>16 C</p>
-      <p className='luogo'>Città</p>
+      <img src={iconUrl} alt='Icona del tempo' className='tempo-icona' />
+      <p className='temperatura'>{weatherData.temperature}°C</p>{" "}
+      <p className='luogo'>{weatherData.location}</p>
       <div className='meteo-data'>
         <div className='col'>
           <p>Umidità</p>
-          <span>UMI</span>
+          <span>{weatherData.humidity}</span>
         </div>
         <div className='col'>
           <p>Vento</p>
-          <span>VEN Km/h</span>
+          <span>{weatherData.windSpeed} Km/h</span>
         </div>
       </div>
     </div>
