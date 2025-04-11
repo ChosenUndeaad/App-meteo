@@ -10,4 +10,5 @@
 .app {
   background-color: #29292b;
   min-height: 100vh;
+  display: grid;
 }
