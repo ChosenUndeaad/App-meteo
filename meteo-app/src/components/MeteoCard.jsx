@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../style/meteoCard.css";
 
 const MeteoCard = () => {
+  //API Key: 5acac74060d7655a3ba8c4c4437a2153
+  // URL: https://api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}
+
+  const search = async (city) => {
+    try {
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=5acac74060d7655a3ba8c4c4437a2153`;
+
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    search("London");
+  }, []);
+
   return (
     <div className='meteo-card'>
       <h1>Previsioni</h1>
