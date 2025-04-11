@@ -1,6 +1,6 @@
 .meteo-card {
   place-self: center;
-  padding: 1em;
+  padding: 4em;
   border-radius: 10px;
   background-image: linear-gradient(45deg, #335daa, #92d0f0);
   display: flex;
@@ -53,4 +53,23 @@
 .luogo {
   color: white;
   font-size: 50px;
+}
+
+.meteo-data {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.meteo-data .col {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 20px;
+}
+
+h1 {
+  margin-bottom: 0.5em;
+  font-size: 80px;
 }

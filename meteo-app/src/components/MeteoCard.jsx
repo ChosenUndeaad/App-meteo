@@ -22,6 +22,10 @@ const MeteoCard = () => {
           <p>Umidità</p>
           <span>UMI</span>
         </div>
+        <div className='col'>
+          <p>Vento</p>
+          <span>VEN Km/h</span>
+        </div>
       </div>
     </div>
   );
