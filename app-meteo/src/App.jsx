@@ -4,7 +4,7 @@ import MeteoCard from "./components/MeteoCard";
 
 function App() {
   return (
-    <div className='app'>
+    <div>
       <MeteoCard />
     </div>
   );
