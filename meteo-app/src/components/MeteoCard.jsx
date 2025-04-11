@@ -39,7 +39,7 @@ const MeteoCard = () => {
 
   return (
     <div className='meteo-card'>
-      <h1>Previsioni</h1>
+      <h1>Che tempo fa?</h1>
       <div className='search-bar'>
         <input type='text' placeholder='Cerca una città ' ref={inputRef} />
         <button type='button' onClick={() => search(inputRef.current.value)}>
